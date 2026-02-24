@@ -1,0 +1,50 @@
+[project]
+name = "vectorify"
+version = "0.1.0"
+description = "Convert raster images (PNG, JPG, BMP, WebP) to simplified SVG vector graphics using k-means colour quantization and contour tracing."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+keywords = [
+    "svg",
+    "vector",
+    "vectorize",
+    "raster-to-vector",
+    "image-to-svg",
+    "color-quantization",
+    "k-means",
+    "contour-tracing",
+    "image-processing",
+    "png-to-svg",
+    "jpg-to-svg",
+    "simplify",
+    "posterize",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=2.4.2",
+    "pillow>=12.1.1",
+    "rdp>=0.8",
+    "scikit-image>=0.25.2",
+    "scipy>=1.17.1",
+]
+
+[dependency-groups]
+dev = [
+    "cairosvg>=2.8.2",
+]
+
+[project.scripts]
+vectorify = "vectorify.cli:main"
