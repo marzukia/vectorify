@@ -1,16 +1,10 @@
 [project]
 name = "vectorify"
-version = "0.1.0"
+version = "0.1.1"
 description = "Convert raster images (PNG, JPG, BMP, WebP) to simplified SVG vector graphics using k-means colour quantization and contour tracing."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 license = "MIT"
-
-[project.urls]
-Homepage = "https://github.com/marzukia/vectorify"
-Repository = "https://github.com/marzukia/vectorify"
-Issues = "https://github.com/marzukia/vectorify/issues"
-
 keywords = [
     "svg",
     "vector",
@@ -47,10 +41,19 @@ dependencies = [
     "scipy>=1.17.1",
 ]
 
+[project.urls]
+Homepage = "https://github.com/marzukia/vectorify"
+Repository = "https://github.com/marzukia/vectorify"
+Issues = "https://github.com/marzukia/vectorify/issues"
+
+[project.scripts]
+vectorify = "vectorify.cli:main"
+
 [dependency-groups]
 dev = [
     "cairosvg>=2.8.2",
 ]
 
-[project.scripts]
-vectorify = "vectorify.cli:main"
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,4 +1,4 @@
-ive am![](./docs/logo.png)
+![logo for vectorify](https://github.com/marzukia/vectorify/raw/main/docs/logo.png)
 
 Convert raster images (PNG, JPG, etc.) into simplified SVG vector graphics using k-means colour quantization and contour tracing.
 
@@ -54,7 +54,7 @@ uv run vectorify update-readme
 
 Expands each shape outward along its edge normals by the given pixel amount. Eliminates sub-pixel gaps between adjacent colour regions caused by smoothing or simplification.
 
-![buffer example](docs/img/buffer.png)
+![buffer example](https://github.com/marzukia/vectorify/raw/main/docs/img/buffer.png)
 
 ---
 
@@ -62,7 +62,7 @@ Expands each shape outward along its edge normals by the given pixel amount. Eli
 
 Applies a median filter of this kernel size to the label map. Fills small holes, removes straggler pixels, and smooths region boundaries. Larger values produce more aggressive cleanup.
 
-![median_size example](docs/img/median_size.png)
+![median_size example](https://github.com/marzukia/vectorify/raw/main/docs/img/median_size.png)
 
 ---
 
@@ -70,7 +70,7 @@ Applies a median filter of this kernel size to the label map. Fills small holes,
 
 Removes connected components smaller than this many pixels, replacing them with their most common neighbouring colour. Catches isolated specks that the median filter misses.
 
-![min_region example](docs/img/min_region.png)
+![min_region example](https://github.com/marzukia/vectorify/raw/main/docs/img/min_region.png)
 
 ---
 
@@ -78,7 +78,7 @@ Removes connected components smaller than this many pixels, replacing them with 
 
 Number of distinct colours the image is quantized into via k-means clustering. Lower values produce a more simplified, poster-like result.
 
-![n_colors example](docs/img/n_colors.png)
+![n_colors example](https://github.com/marzukia/vectorify/raw/main/docs/img/n_colors.png)
 
 ---
 
@@ -86,7 +86,7 @@ Number of distinct colours the image is quantized into via k-means clustering. L
 
 Epsilon value for the Ramer-Douglas-Peucker algorithm. Reduces the number of vertices in each contour path. Higher values = fewer vertices = simpler shapes.
 
-![simplify example](docs/img/simplify.png)
+![simplify example](https://github.com/marzukia/vectorify/raw/main/docs/img/simplify.png)
 
 ---
 
@@ -94,4 +94,4 @@ Epsilon value for the Ramer-Douglas-Peucker algorithm. Reduces the number of ver
 
 Gaussian smoothing sigma applied to contour vertices. Rounds off jagged pixel-aligned edges into flowing curves. Applied before simplification.
 
-![smooth example](docs/img/smooth.png)
+![smooth example](https://github.com/marzukia/vectorify/raw/main/docs/img/smooth.png)
