@@ -3,8 +3,14 @@ name = "vectorify"
 version = "0.1.0"
 description = "Convert raster images (PNG, JPG, BMP, WebP) to simplified SVG vector graphics using k-means colour quantization and contour tracing."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 license = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/marzukia/vectorify"
+Repository = "https://github.com/marzukia/vectorify"
+Issues = "https://github.com/marzukia/vectorify/issues"
+
 keywords = [
     "svg",
     "vector",
