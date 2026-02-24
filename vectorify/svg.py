@@ -91,10 +91,12 @@ class Svg(Element):
                     True, np.any(np.diff(contour, axis=0) != 0, axis=1)
                 )
                 c = contour[keep]
-                moves = " ".join(
-                    f"L{round(y, 2)},{round(x, 2)}" for x, y in c
-                )
-                d_parts.append("M" + moves[1:] + "Z")
+                # Build coordinate string with vectorised numpy ops
+                ys = np.round(c[:, 1], 2).astype(str)
+                xs = np.round(c[:, 0], 2).astype(str)
+                pairs = np.char.add(np.char.add("L", ys), np.char.add(",", xs))
+                path_str = "".join(pairs)
+                d_parts.append("M" + path_str[1:] + "Z")
             d = "".join(d_parts)
             parts.append(f'<path d="{d}" fill="{fill}"/>')
         self._paths = "".join(parts)
