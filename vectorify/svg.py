@@ -77,13 +77,27 @@ class Svg(Element):
 
     @paths.setter
     def paths(self, contours: Dict) -> str:
-        self._paths = ""
+        parts = []
         for color, color_contours in contours.items():
             a = float(color[3] / 255 if len(color) > 3 else 1)
             if a <= 0.5:
                 continue
+            r, g, b = rgba_to_rgb(color)
+            fill = f"rgb({r},{g},{b})"
+            # Merge all contour d-strings for the same fill into one <path>
+            d_parts = []
             for contour in color_contours:
-                self._paths += Path(contour=contour, fill=color).to_html()
+                keep = np.append(
+                    True, np.any(np.diff(contour, axis=0) != 0, axis=1)
+                )
+                c = contour[keep]
+                moves = " ".join(
+                    f"L{round(y, 2)},{round(x, 2)}" for x, y in c
+                )
+                d_parts.append("M" + moves[1:] + "Z")
+            d = "".join(d_parts)
+            parts.append(f'<path d="{d}" fill="{fill}"/>')
+        self._paths = "".join(parts)
 
     @classmethod
     def generate_svg(
@@ -97,13 +111,22 @@ class Svg(Element):
         simplify: float = 0.5,
         buffer: float = 1,
     ):
+        import time
+
+        t0 = time.perf_counter()
         img = load_image(filepath)
+        print(f"[vectorify] load_image: {time.perf_counter() - t0:.2f}s")
+
+        t1 = time.perf_counter()
         labels, centroids = quantize_image(
             img,
             n_colors=n_colors,
             median_size=median_size,
             min_region=min_region,
         )
+        print(f"[vectorify] quantize_image: {time.perf_counter() - t1:.2f}s")
+
+        t2 = time.perf_counter()
         color_contours = extract_color_contours(
             labels,
             centroids,
@@ -111,6 +134,11 @@ class Svg(Element):
             simplify=simplify,
             buffer=buffer,
         )
+        print(f"[vectorify] extract_contours: {time.perf_counter() - t2:.2f}s")
+
+        t3 = time.perf_counter()
         svg = Svg(width=img.width, height=img.height, contours=color_contours)
         with open(output_path, "w") as f:
             f.write(svg.to_html())
+        print(f"[vectorify] write_svg: {time.perf_counter() - t3:.2f}s")
+        print(f"[vectorify] total: {time.perf_counter() - t0:.2f}s")

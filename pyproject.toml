@@ -1,6 +1,6 @@
 [project]
 name = "vectorify"
-version = "0.1.1"
+version = "0.1.2"
 description = "Convert raster images (PNG, JPG, BMP, WebP) to simplified SVG vector graphics using k-means colour quantization and contour tracing."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -38,6 +38,7 @@ dependencies = [
     "pillow>=12.1.1",
     "rdp>=0.8",
     "scikit-image>=0.25.2",
+    "scikit-learn>=1.4",
     "scipy>=1.17.1",
 ]
 
